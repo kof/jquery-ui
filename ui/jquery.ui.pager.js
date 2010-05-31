@@ -25,6 +25,13 @@ $.widget( "ui.pager", {
             last: "&raquo;",
             next: "&gt;",
             prev: "&lt;"
+        },
+        titles: {
+            first: "Go to first page",
+            last: "Go to last page",
+            next: "Go to next page",
+            prev: "Go to previous page",
+            page: "Go to page"
         }
     },
  
@@ -87,6 +94,7 @@ $.widget( "ui.pager", {
         } else {
             o.active = parseInt(action);
         }           
+        
         this._setOption( "active", o.active );
 
         return false;    
@@ -100,6 +108,7 @@ $.widget( "ui.pager", {
         var o = this.options,
             data = {
                 classes: classes,
+                titles: o.titles,
                 active: o.active,
                 firstDisabled: o.active <= 1 ? classes.disabled : "",
                 lastDisabled: !o.pages || o.active >= o.pages ? classes.disabled : "",
@@ -145,25 +154,29 @@ var classes = {
 };
 
 var template = '\
-        <li class="<%=classes.page%>-first <%=firstDisabled%>" role="button">\
+        <li class="<%=classes.page%>-first <%=firstDisabled%>" role="button" title="<%=titles.first%>">\
             <a href="javascript:;" rel="first" class="ui-widget-content ui-corner-all ui-state-default">\
                 <span><%=labels.first%></span>\
             </a>\
         </li>\
-        <li class="<%=classes.page%>-prev <%=firstDisabled%>" role="button"><a href="javascript:;" rel="prev" class="ui-widget-content ui-corner-all ui-state-default"><span><%=labels.prev%></span></a></li>\
+        <li class="<%=classes.page%>-prev <%=firstDisabled%>" role="button" title="<%=titles.prev%>">\
+            <a href="javascript:;" rel="prev" class="ui-widget-content ui-corner-all ui-state-default">\
+                <span><%=labels.prev%></span>\
+            </a>\
+        </li>\
         <% for ( var i = first; i <= last; ++i ) { %>\
-            <li class="<%=classes.page%>" role="button">\
+            <li class="<%=classes.page%>" role="button" title="<%=titles.page%> <%=i%>">\
                 <a href="javascript:;" rel="<%=i%>" class="ui-widget-content ui-corner-all ui-state-default <%=(i == active ? classes.active : \"\") %>">\
                     <span><%=i%></span>\
                 </a>\
             </li>\
         <% } %>\
-        <li class="<%=classes.page%>-next <%=lastDisabled%>" role="button">\
+        <li class="<%=classes.page%>-next <%=lastDisabled%>" role="button" title="<%=titles.next%>">\
             <a href="javascript:;" rel="next" class="ui-widget-content ui-corner-all ui-state-default">\
                 <span><%=labels.next%></span>\
             </a>\
         </li>\
-        <li class="<%=classes.page%>-last <%=lastDisabled%>" role="button">\
+        <li class="<%=classes.page%>-last <%=lastDisabled%>" role="button" title="<%=titles.last%>">\
             <a href="javascript:;" rel="last" class="ui-widget-content ui-corner-all ui-state-default">\
                 <span><%=labels.last%></span>\
             </a>\
