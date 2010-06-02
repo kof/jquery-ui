@@ -62,20 +62,18 @@ $.widget( "ui.pager", {
     },
     
     _setOption: function( key, value ) {
+        $.Widget.prototype._setOption.apply( this, arguments );
         switch ( key ) {
             case "active":
-                this.options.active = value;
                 this._update();
                 this._trigger( "change", null, this._ui() );
                 break;
             case "pages":
-                this.options.pages = value;
                 this._update();
                 value <= 1 ? this.disable() : this.enable();
                 break;
         }
 
-        $.Widget.prototype._setOption.apply( this, arguments );
     },    
         
     _clickHandler: function( event ) {
