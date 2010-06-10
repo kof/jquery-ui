@@ -144,7 +144,7 @@ $.widget( "ui.pager", {
 });
 
 var classes = {
-    base: "ui-pager ui-widget ui-widget-content ui-corner-all",
+    base: "ui-pager ui-widget ui-widget-content ui-corner-all ui-helper-clearfix",
     page: "ui-pager-page",
     active: "ui-state-active",
     disabled: "ui-state-disabled",
